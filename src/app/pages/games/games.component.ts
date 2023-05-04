@@ -3,19 +3,18 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss'],
+  selector: 'app-games',
+  templateUrl: './games.component.html',
+  styleUrls: ['./games.component.scss'],
 })
-export class AboutComponent implements OnInit {
+export class GamesComponent implements OnInit {
   constructor(
     private readonly userService: UserService,
     private readonly router: Router
   ) {}
   ngOnInit(): void {
-    console.log(this.userService.userLogged);
     if (!this.userService.userLogged) {
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('user/login');
     }
   }
 }

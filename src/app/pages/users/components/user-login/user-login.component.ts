@@ -20,7 +20,7 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.userService.userLogged) {
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('games');
     }
   }
 
@@ -33,7 +33,7 @@ export class UserLoginComponent implements OnInit {
     const message = user ? `Bienvenido ${user.displayName}` : 'Login no ok';
     const icon = user ? 'success' : 'error';
     this.alertService.showAlert({ icon, message: message });
-    this.router.navigateByUrl('about');
+    this.router.navigateByUrl('games');
     sessionStorage.setItem('access_token', await user.getIdToken());
   }
 

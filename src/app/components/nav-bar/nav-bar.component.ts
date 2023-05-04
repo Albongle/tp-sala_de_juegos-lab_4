@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
@@ -7,11 +7,16 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss'],
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
+  protected name: string;
+  protected imgDefault: string;
   constructor(
     protected readonly userService: UserService,
     private readonly router: Router
-  ) {}
+  ) {
+    this.imgDefault = '../../../assets/images/user_default.png';
+  }
+  ngOnInit(): void {}
 
   public signOut() {
     this.userService.logout();

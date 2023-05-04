@@ -6,6 +6,4 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })
-export class FooterComponent {
-  constructor(protected readonly userService: UserService) {}
-}
+export class FooterComponent {}

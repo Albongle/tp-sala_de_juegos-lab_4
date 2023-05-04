@@ -15,7 +15,7 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.userService.userLogged) {
-      this.router.navigateByUrl('error');
+      this.router.navigateByUrl('games');
     }
   }
 }
