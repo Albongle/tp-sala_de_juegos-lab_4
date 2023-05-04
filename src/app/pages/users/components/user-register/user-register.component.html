@@ -1,0 +1,153 @@
+<div class="m-3 py-4">
+  <div class="row justify-content-evenly align-items-md-stretch">
+    <div class="m-md-3 mt-1 col-md-4">
+      <div class="h-100 p-5 bg-light shadow rounded">
+        <h2 class="mt-1 text-center">Registrate</h2>
+        <img
+          class="col-xxl-3 col-lg-3 col-6 m-1"
+          src="../../../assets/images/icon-register.png"
+          alt="register"
+        />
+        <form class="">
+          <div class="row g-3 justify-content-center">
+            <div class="col-sm-6">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input
+                type="text"
+                name="nombre"
+                class="form-control"
+                id="nombre"
+                [(ngModel)]="user.name"
+                placeholder=""
+                required
+              />
+            </div>
+
+            <div class="col-sm-6">
+              <label for="apellido" class="form-label">Apellido</label>
+              <input
+                type="text"
+                name="apellido"
+                class="form-control"
+                [(ngModel)]="user.lastName"
+                id="apellido"
+                placeholder=""
+                required
+              />
+            </div>
+
+            <div class="col-12">
+              <label for="usuario" class="form-label">Usuario</label>
+              <div class="input-group">
+                <span class="input-group-text">@</span>
+                <input
+                  type="text"
+                  name="usuario"
+                  class="form-control"
+                  id="usuario"
+                  [(ngModel)]="user.user"
+                  placeholder="Usuario"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="password" class="form-label">Constraseña</label>
+              <div class="input-group">
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  id="password"
+                  [(ngModel)]="user.password"
+                  placeholder="Constraseña"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="col-12">
+              <label for="email" class="form-label"
+                >Email
+                <span class="text-body-secondary">(Optional)</span></label
+              >
+              <input
+                name="email"
+                type="email"
+                class="form-control"
+                id="email"
+                [(ngModel)]="user.email"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div class="col-12">
+              <label for="direccion" class="form-label">Direccion</label>
+              <input
+                name="direccion"
+                type="text"
+                class="form-control"
+                id="direccion"
+                [(ngModel)]="user.address"
+                placeholder="1234 Main St"
+                required
+              />
+            </div>
+
+            <div *ngIf="countries" class="col-12">
+              <label for="nacionalidad" class="form-label">Pais</label>
+              <div class="row justify-content-between">
+                <div class="col-8">
+                  <select
+                    name="country"
+                    class="form-select"
+                    id="nacionalidad"
+                    [(ngModel)]="countrySelected"
+                    (change)="selectedCountry()"
+                    required
+                  >
+                    <option defualt>Elige una opcion</option>
+                    <option
+                      *ngFor="let country of countries"
+                      [ngValue]="country"
+                    >
+                      {{ country.name }}
+                    </option>
+                  </select>
+                </div>
+
+                <img
+                  *ngIf="countrySelected"
+                  [ngStyle]="{ width: '64px' }"
+                  class="mt-1 col-4"
+                  [src]="countrySelected.flag"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="mt-3 w-100 btn btn-lg btn-outline-primary btn-block"
+            type="button"
+            (click)="registeWithFirebase()"
+          >
+            Registrarse
+          </button>
+
+          <div class="w-100 m-0 mt-3 row justify-content-center">
+            <label>
+              Ya tienes cuenta?
+              <span
+                class="btn align-item-center badge bg-success text-ligth msj-block"
+                routerLink="/user/login"
+                >Ingresa</span
+              ></label
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
