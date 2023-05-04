@@ -1,60 +1,62 @@
-<div class="m-3 row justify-content-center align-item-center">
-  <div
-    class="bg-light shadow p-5 m-3 rounded col-xxl-3 col-lg-4 col-md-6 col-sm-8"
-  >
-    <h2 class="mt-1 text-center">Bienvenido</h2>
-    <div class="row justify-content-center">
-      <img
-        class="col-xxl-3 col-lg-3 col-6 align-center m-1"
-        src="../../../assets/images/icon-login.png"
-        alt="login"
-      />
-      <input
-        type="text"
-        class="m-3 form-control"
-        name="email"
-        placeholder="Email Address"
-        [(ngModel)]="email"
-        required=""
-        autofocus=""
-      />
-      <input
-        type="password"
-        class="m-3 form-control"
-        name="password"
-        placeholder="Password"
-        [(ngModel)]="password"
-        required=""
-      />
-      <button
-        class="m-1 btn btn-lg btn-outline-success btn-block"
-        type="button"
-        (click)="loginUser()"
-      >
-        Login
-      </button>
-      <button
-        class="m-1 btn btn-lg btn-outline-danger btn-block"
-        type="button"
-        (click)="loginWithGoogle()"
-      >
-        Login Google
+<section class="login">
+  <div class="m-3 h-100 row justify-content-center align-items-center">
+    <div
+      class="bg-light shadow p-1 m-1 rounded col-xxl-3 col-lg-4 col-md-6 col-sm-8"
+    >
+      <h2 class="mt-1 text-center">Bienvenido</h2>
+      <div class="row p-2 m-2 justify-content-center align-items-center">
         <img
-          [ngStyle]="{ width: '32px' }"
-          src="../../../../../assets/images/google.png"
-          alt=""
+          class="col-xxl-3 col-lg-3 col-6 align-center m-1"
+          src="../../../assets/images/icon-login.png"
+          alt="login"
         />
-      </button>
-
-      <label>
-        Aun no tienes cuenta?
-        <span
-          class="btn align-item-center badge bg-success text-ligth msj-block"
-          routerLink="/user/register"
+        <input
+          type="text"
+          class="m-3 form-control"
+          name="email"
+          placeholder="Email Address"
+          [(ngModel)]="email"
+          required=""
+          autofocus=""
+        />
+        <input
+          type="password"
+          class="m-3 form-control"
+          name="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          required=""
+        />
+        <button
+          class="m-1 btn btn-lg btn-outline-success btn-block"
+          type="button"
+          (click)="loginUser()"
         >
-          Registrate</span
-        ></label
-      >
+          Login
+        </button>
+        <button
+          class="m-1 btn btn-lg btn-outline-danger btn-block"
+          type="button"
+          (click)="loginWithGoogle()"
+        >
+          Login Google
+          <img
+            [ngStyle]="{ width: '32px' }"
+            src="../../../../../assets/images/google.png"
+            alt=""
+          />
+        </button>
+
+        <label>
+          Aun no tienes cuenta?
+          <span
+            class="btn align-item-center badge bg-success text-ligth msj-block"
+            routerLink="/user/register"
+          >
+            Registrate</span
+          ></label
+        >
+      </div>
     </div>
   </div>
-</div>
+</section>
