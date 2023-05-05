@@ -41,19 +41,19 @@
           </div>
 
           <div class="col-sm-6">
-            <label for="last_name" class="form-label">Apellido</label>
+            <label for="lastName" class="form-label">Apellido</label>
             <input
               type="text"
-              formControlName="last_name"
+              formControlName="lastName"
               class="form-control"
-              id="last_name"
+              id="lastName"
               placeholder=""
             />
             <span
               [hidden]="
                 !(
-                  formNewUser.controls['last_name'].touched &&
-                  formNewUser.controls['last_name'].errors
+                  formNewUser.controls['lastName'].touched &&
+                  formNewUser.controls['lastName'].errors
                 )
               "
               class="mt-2 p-0 shadow text-center form-control alert alert-danger"
@@ -117,16 +117,23 @@
               id="email"
               placeholder="you@example.com"
             />
-            <span
+            <div
               [hidden]="
-                !(
-                  formNewUser.controls['email'].touched &&
-                  formNewUser.controls['email'].errors
-                )
+                !formNewUser.controls['email'].touched &&
+                formNewUser.controls['email'].invalid
               "
-              class="mt-2 p-0 shadow text-center form-control alert alert-danger"
-              >Email es requerido</span
             >
+              <span
+                *ngIf="formNewUser.controls['email'].errors?.['required']"
+                class="mt-2 p-0 shadow text-center form-control alert alert-danger"
+                >Email es requerido</span
+              >
+              <span
+                *ngIf="formNewUser.controls['email'].errors?.['email']"
+                class="mt-2 p-0 shadow text-center form-control alert alert-danger"
+                >Email debe ser valido</span
+              >
+            </div>
           </div>
 
           <div class="col-12">
@@ -207,5 +214,3 @@
     </div>
   </div>
 </section>
-
-{{ formNewUser.value | json }}

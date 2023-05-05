@@ -5,7 +5,12 @@ import { UserService } from '../../../../services/user.service';
 import { CountryService } from '../../../../services/country.service';
 import { Country } from '../../../../models/contry.model';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -26,8 +31,8 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
   ) {
     this.formNewUser = this.formBuilder.group({
       name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      email: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       country: ['', Validators.required],
       user: ['', Validators.required],
@@ -50,14 +55,13 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
 
   public async registeWithFirebase(): Promise<void> {
     try {
-      this.formNewUser;
-      // const register = await Promise.all([
-      //   this.userService.registerWithFirebase(this.user),
-      //   this.userService.saveUserInStore(this.user),
-      // ]);
+      this.validateForm();
+      const user = new User(this.formNewUser.value);
+      const register = await this.userService.registerWithFirebase(user);
+      const userSave = this.userService.saveUserInStore(user);
 
-      console.log(new User(this.formNewUser.value));
-
+      console.log(register);
+      console.log(userSave);
       this.alertService.showAlert({
         icon: 'success',
         message: 'Se registro usuario de forma exitosa',
@@ -69,12 +73,18 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
     this.cleanFields();
   }
 
-  // public prueba(): void {
-  //   this.userService.getUsersFromStore().subscribe((a) => console.log(a));
-  // }
   private cleanFields(): void {
-    for (let iterator of this.formNewUser.value) {
-      iterator = undefined;
+    for (const key in this.formNewUser.controls) {
+      this.formNewUser.controls[key].setValue(undefined);
+    }
+  }
+
+  private validateForm() {
+    if (this.formNewUser.invalid) {
+      for (const key in this.formNewUser.controls) {
+        this.formNewUser.controls[key].markAsTouched();
+      }
+      throw new Error('Debe completar los datos para el registro');
     }
   }
 }
