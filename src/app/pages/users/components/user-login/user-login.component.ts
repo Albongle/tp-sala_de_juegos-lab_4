@@ -34,10 +34,7 @@ export class UserLoginComponent implements OnInit {
   public async loginWithMailAndPassword() {
     const user = new User(this.formLogin.value);
     try {
-      console.log(user);
-
       const userLog = await this.userService.loginWithEmailAndPassword(user);
-
       this.alertService.showAlert({
         icon: 'success',
         message: `Bienvenido ${userLog.email}`,
