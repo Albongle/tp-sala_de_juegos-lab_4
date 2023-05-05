@@ -5,6 +5,7 @@ import { UserService } from '../../../../services/user.service';
 import { CountryService } from '../../../../services/country.service';
 import { Country } from '../../../../models/contry.model';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -12,18 +13,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-register.component.scss'],
 })
 export class UserRegisterComponent implements OnInit, OnDestroy {
-  protected user: User;
   protected countries: Country[];
-  protected countrySelected: Country;
   protected susbcribeCountries;
+  protected formNewUser: FormGroup;
 
   constructor(
     private readonly alertService: AlertService,
     private readonly userService: UserService,
     private readonly countriesService: CountryService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly formBuilder: FormBuilder
   ) {
-    this.user = new User();
+    this.formNewUser = this.formBuilder.group({
+      name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      country: ['', Validators.required],
+      user: ['', Validators.required],
+      address: ['', Validators.required],
+    });
     this.susbcribeCountries = this.countriesService
       .getCountries()
       .subscribe((countries) => (this.countries = countries));
@@ -41,12 +50,13 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
 
   public async registeWithFirebase(): Promise<void> {
     try {
-      const register = await Promise.all([
-        this.userService.registerWithFirebase(this.user),
-        this.userService.saveUserInStore(this.user),
-      ]);
+      this.formNewUser;
+      // const register = await Promise.all([
+      //   this.userService.registerWithFirebase(this.user),
+      //   this.userService.saveUserInStore(this.user),
+      // ]);
 
-      console.log(register);
+      console.log(new User(this.formNewUser.value));
 
       this.alertService.showAlert({
         icon: 'success',
@@ -63,15 +73,8 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
   //   this.userService.getUsersFromStore().subscribe((a) => console.log(a));
   // }
   private cleanFields(): void {
-    this.user.email = '';
-    this.user.address = '';
-    this.user.name = '';
-    this.user.lastName = '';
-    this.user.password = '';
-    this.user.user = '';
-  }
-
-  public selectedCountry(): void {
-    this.user.country = this.countrySelected;
+    for (let iterator of this.formNewUser.value) {
+      iterator = undefined;
+    }
   }
 }
