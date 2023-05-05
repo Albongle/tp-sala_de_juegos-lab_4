@@ -15,7 +15,11 @@ export class FirebaseAuthProvider {
   constructor(private readonly fireAuth: Auth) {}
 
   public loginWithEmailAndPassword(user: User) {
-    return signInWithEmailAndPassword(this.fireAuth, user.email!, user.email!);
+    return signInWithEmailAndPassword(
+      this.fireAuth,
+      user.email!,
+      user.password!
+    );
   }
 
   public registerUserWithEmailAndPassword(user: User) {

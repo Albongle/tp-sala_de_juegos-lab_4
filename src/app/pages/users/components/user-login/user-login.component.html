@@ -1,6 +1,8 @@
 <section class="login">
   <div class="p-3 h-100 row justify-content-center align-items-center">
-    <div
+    <form
+      [formGroup]="formLogin"
+      (ngSubmit)="loginWithMailAndPassword()"
       class="bg-light shadow p-1 m-1 rounded col-xxl-3 col-lg-4 col-md-6 col-sm-8"
     >
       <h2 class="mt-1 text-center">Bienvenido</h2>
@@ -15,22 +17,50 @@
           class="m-3 form-control"
           name="email"
           placeholder="Email Address"
-          [(ngModel)]="email"
-          required=""
+          formControlName="email"
           autofocus=""
         />
+        <div
+          [hidden]="
+            !formLogin.controls['email'].touched ||
+            !formLogin.controls['email'].errors
+          "
+        >
+          <span
+            *ngIf="formLogin.controls['email'].errors?.['required']"
+            class="mt-2 p-0 shadow text-center form-control alert alert-danger"
+            >Email es requerido</span
+          >
+          <span
+            *ngIf="formLogin.controls['email'].errors?.['email']"
+            class="mt-2 p-0 shadow text-center form-control alert alert-danger"
+            >Email debe ser valido</span
+          >
+        </div>
         <input
           type="password"
           class="m-3 form-control"
           name="password"
           placeholder="Password"
-          [(ngModel)]="password"
-          required=""
+          formControlName="password"
+          autofocus=""
         />
+
+        <div
+          [hidden]="
+            !formLogin.controls['password'].touched ||
+            !formLogin.controls['password'].errors
+          "
+        >
+          <span
+            class="mt-2 p-0 shadow text-center form-control alert alert-danger"
+            >Password es requerido</span
+          >
+        </div>
+
         <button
           class="m-1 btn btn-lg btn-outline-success btn-block"
-          type="button"
-          (click)="loginUser()"
+          type="submit"
         >
           Login
         </button>
@@ -57,6 +87,6 @@
           ></label
         >
       </div>
-    </div>
+    </form>
   </div>
 </section>

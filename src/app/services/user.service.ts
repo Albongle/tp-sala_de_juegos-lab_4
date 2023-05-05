@@ -19,6 +19,11 @@ export class UserService {
       await this.firebaseAuthProvider.loginWithGoogleAuthProvider();
     return this._userLogged.user;
   }
+  public async loginWithEmailAndPassword(user: User) {
+    this._userLogged =
+      await this.firebaseAuthProvider.loginWithEmailAndPassword(user);
+    return this._userLogged.user;
+  }
 
   public get userLogged() {
     return this._userLogged?.user;
