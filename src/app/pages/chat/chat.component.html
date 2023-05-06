@@ -1,0 +1,65 @@
+<section
+  class="open-chat row justify-content-center"
+  [hidden]="activated && !userService.userLogged"
+  (click)="activatedChat()"
+>
+  <img
+    [ngClass]="'col-2'"
+    [ngStyle]="{ width: '128px' }"
+    src="../../../assets/icon_chat.png"
+    alt="icono_chat"
+  />
+</section>
+<section
+  class="card text-center chat-container"
+  [hidden]="!activated && userService.userLogged"
+>
+  <div class="card-header bg-primary text-white fs-4 fw-bold">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-3">Chat</div>
+      <input
+        class="col-3 m-1 btn btn-danger"
+        type="button"
+        value="Cerrar"
+        (click)="activatedChat()"
+      />
+    </div>
+  </div>
+
+  <div id="contendor-msjs" class="overflow-hidden card-body">
+    <div *ngFor="let message of listOfMessages" class="m-1">
+      <p
+        [ngClass]="
+          userService.userLogged?.uid === message.id
+            ? formatMessageSent
+            : formatMessageReceived
+        "
+      >
+        {{ message.message }}
+        <span [ngClass]="'hora-envio'"> {{ message.time }}</span>
+      </p>
+    </div>
+  </div>
+  <form
+    [formGroup]="formChat"
+    class="card-footer text-muted"
+    (submit)="sendMessage()"
+  >
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Ingrese su mensaje"
+        formControlName="message"
+      />
+      <button class="input-group-text" id="basic-addon2" type="submit">
+        <img
+          class="enviar-mensaje"
+          [ngStyle]="{ width: '20px' }"
+          src="https://icons.iconarchive.com/icons/vexels/office/1024/email-send-icon.png"
+          alt="enviar-mensaje"
+        />
+      </button>
+    </div>
+  </form>
+</section>
