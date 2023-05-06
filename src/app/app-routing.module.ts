@@ -22,7 +22,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/games/games.module').then((m) => m.GamesModule),
   },
-  { path: 'chat', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) },
+  {
+    path: 'chat',
+    loadChildren: () =>
+      import('./pages/chat/chat.module').then((m) => m.ChatModule),
+  },
   {
     path: '**',
     loadChildren: () =>

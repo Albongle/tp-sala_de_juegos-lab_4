@@ -47,6 +47,12 @@
         routerLink="about"
         >Acerca De</a
       >
+      <a
+        *ngIf="userService.userLogged"
+        class="nav-link text-light"
+        routerLink="chat"
+        >Chat</a
+      >
     </div>
   </div>
 

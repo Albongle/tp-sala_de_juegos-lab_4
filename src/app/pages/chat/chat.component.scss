@@ -1,0 +1,53 @@
+.chat-container {
+  width: 400px;
+  height: 600px;
+  position: fixed;
+  right: 0.5rem;
+  bottom: 6rem;
+}
+.enviar-mensaje:active {
+  transform: scale(0.9);
+}
+.card-body {
+  padding: 0.5rem;
+  background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/disp/c8dbbe73426833.5c08f56351b26.png");
+}
+
+.recibido {
+  text-align: start;
+  color: white;
+  font-size: 1.6rem;
+  display: block;
+  float: right;
+  min-width: 51%;
+}
+.enviado {
+  text-align: start;
+  color: white;
+  font-size: 1.6rem;
+  display: block;
+  float: left;
+  min-width: 51%;
+}
+
+.hora-envio {
+  text-align: end;
+  margin: 0 0 0 1rem;
+  padding: 0;
+  font-size: 0.6rem;
+  color: ghostwhite;
+}
+.open-chat {
+  position: fixed;
+  bottom: 6rem;
+  right: 0.5rem;
+  img {
+    width: 6.4rem;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+      transition-duration: 0.5s;
+      transition-delay: 0.5s;
+    }
+  }
+}
