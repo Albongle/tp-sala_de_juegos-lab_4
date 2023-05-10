@@ -30,11 +30,18 @@
     <div *ngFor="let message of listOfMessages" class="m-1">
       <p
         [ngClass]="
-          userService.userLogged?.uid === message.id
+          userService.userLogged?.email === message.email
             ? formatMessageSent
             : formatMessageReceived
         "
       >
+        <span [ngClass]="">
+          {{
+            message.email === userService.userLogged?.email
+              ? "Tu: "
+              : message.user
+          }}</span
+        >
         {{ message.message }}
         <span [ngClass]="'hora-envio'"> {{ message.time }}</span>
       </p>

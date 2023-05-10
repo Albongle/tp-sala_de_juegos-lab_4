@@ -5,12 +5,8 @@ import { UserService } from '../../../../services/user.service';
 import { CountryService } from '../../../../services/country.service';
 import { Country } from '../../../../models/contry.model';
 import { Router } from '@angular/router';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +15,7 @@ import {
 })
 export class UserRegisterComponent implements OnInit, OnDestroy {
   protected countries: Country[];
-  protected susbcribeCountries;
+  protected susbcribeCountries: Subscription;
   protected formNewUser: FormGroup;
 
   constructor(
@@ -44,7 +40,9 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     //aca desuscribirme
-    this.susbcribeCountries.unsubscribe();
+    if (this.susbcribeCountries) {
+      this.susbcribeCountries.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
