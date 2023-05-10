@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collectionData,
+  collection,
+  setDoc,
+  doc,
+} from '@angular/fire/firestore';
 import { addDoc } from 'firebase/firestore';
 
 @Injectable({
@@ -14,5 +20,9 @@ export class FirebaseStoreProvider {
 
   public saveDoc(col: string, doc: any) {
     return addDoc(collection(this.firestore, col), doc);
+  }
+
+  public setDocWithId(col: string, id: any, data: any) {
+    return setDoc(doc(this.firestore, 'mensajes', id), data);
   }
 }
