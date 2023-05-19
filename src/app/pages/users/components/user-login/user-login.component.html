@@ -1,5 +1,7 @@
 <section class="login">
-  <div class="p-3 h-100 row justify-content-center align-items-center">
+  <div
+    class="w-100 m-0 p-1 h-100 row justify-content-center align-items-center"
+  >
     <form
       [formGroup]="formLogin"
       (ngSubmit)="loginWithMailAndPassword()"
@@ -22,7 +24,7 @@
         />
         <div
           [hidden]="
-            !formLogin.controls['email'].touched ||
+            formLogin.controls['email'].pristine ||
             !formLogin.controls['email'].errors
           "
         >
@@ -48,7 +50,7 @@
 
         <div
           [hidden]="
-            !formLogin.controls['password'].touched ||
+            formLogin.controls['password'].pristine ||
             !formLogin.controls['password'].errors
           "
         >
@@ -73,6 +75,31 @@
           <img
             [ngStyle]="{ width: '32px' }"
             src="../../../../../assets/images/google.png"
+            alt=""
+          />
+        </button>
+        <button
+          class="m-1 btn btn-lg btn-outline-secondary btn-block"
+          type="button"
+          (click)="setUserTest()"
+        >
+          Setear usuario prueba
+          <img
+            [ngStyle]="{ width: '32px' }"
+            src="../../../../../assets/images/user_boton_test.png"
+            alt=""
+          />
+        </button>
+
+        <button
+          class="m-1 btn btn-lg btn-outline-warning btn-block"
+          type="button"
+          (click)="setUserAdmin()"
+        >
+          Setear admin prueba
+          <img
+            [ngStyle]="{ width: '32px' }"
+            src="../../../../../assets/images/user_boton_test_admin.png"
             alt=""
           />
         </button>

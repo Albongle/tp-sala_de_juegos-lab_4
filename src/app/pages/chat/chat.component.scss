@@ -1,9 +1,5 @@
 .chat-container {
-  width: 400px;
-  height: 600px;
-  position: fixed;
-  right: 0.5rem;
-  bottom: 6rem;
+  height: 90vh;
 }
 .enviar-mensaje:active {
   transform: scale(0.9);
@@ -38,16 +34,13 @@
   color: ghostwhite;
 }
 .open-chat {
-  position: fixed;
-  bottom: 6rem;
-  right: 0.5rem;
   img {
     width: 6.4rem;
     &:hover {
       cursor: pointer;
       transform: scale(1.1);
-      transition-duration: 0.5s;
-      transition-delay: 0.5s;
+      transition-duration: 0.2s;
+      transition-delay: 0.1s;
     }
   }
 }

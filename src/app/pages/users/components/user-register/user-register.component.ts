@@ -79,9 +79,6 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
 
   private validateForm() {
     if (this.formNewUser.invalid) {
-      for (const key in this.formNewUser.controls) {
-        this.formNewUser.controls[key].markAsTouched();
-      }
       throw new Error('Debe completar los datos para el registro');
     }
   }

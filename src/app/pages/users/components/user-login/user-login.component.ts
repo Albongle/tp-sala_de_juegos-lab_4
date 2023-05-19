@@ -61,4 +61,15 @@ export class UserLoginComponent implements OnInit {
       this.formLogin.controls[key].setValue(undefined);
     }
   }
+
+  public setUserTest() {
+    this.setUser('email@mail.com', '1234567');
+  }
+
+  public setUserAdmin() {
+    this.setUser('admin@mail.com', '1234567');
+  }
+  private setUser(email: string, password: string) {
+    this.formLogin.setValue({ email, password });
+  }
 }

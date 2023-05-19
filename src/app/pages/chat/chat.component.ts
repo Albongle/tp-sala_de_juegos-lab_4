@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { ChatService } from './services/chat.service';
+import { ChatService } from '../../services/chat.service';
 import { Subscription, map } from 'rxjs';
 
 @Component({
@@ -39,20 +39,21 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit(): void {
-    this.subscribeChat = this.chatService
-      .getAllMessages()
-      .pipe(
-        map((message) => {
-          const mapeo = message.reduce((prev: any, curr: any) => {
-            prev.push(...curr.messages);
-            return prev;
-          }, []);
-          return mapeo;
-        })
-      )
-      .subscribe((messages) => (this.listOfMessages = [...messages]));
     if (!this.userService.userLogged) {
       this.router.navigateByUrl('');
+    } else {
+      this.subscribeChat = this.chatService
+        .getAllMessages()
+        .pipe(
+          map((message) => {
+            const mapeo = message.reduce((prev: any, curr: any) => {
+              prev.push(...curr.messages);
+              return prev;
+            }, []);
+            return mapeo;
+          })
+        )
+        .subscribe((messages) => (this.listOfMessages = [...messages]));
     }
   }
 
@@ -93,5 +94,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
   protected activatedChat() {
     this.activated = !this.activated;
+    this.scrollLastElement();
   }
 }
