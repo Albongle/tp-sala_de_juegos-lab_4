@@ -1,15 +1,18 @@
 <div class="row m-1 chat-container justify-content-center align-items-center">
   <section
-    class="col-4 open-chat row justify-content-center"
+    class="col-4 open-chat row justify-content-center align-items-center"
     [hidden]="activated || !userService.userLogged"
     (click)="activatedChat()"
   >
-    <img
-      [ngClass]="'col-2'"
-      [ngStyle]="{ width: '128px', heigth: '128px' }"
-      src="../../../assets/icon_chat.png"
-      alt="icono_chat"
-    />
+    <div [ngClass]="'col-2 btn-chat'">
+      <img
+        [ngStyle]="{ width: '128px', heigth: '128px' }"
+        src="../../../assets/icon_chat.png"
+        alt="icono_chat"
+      />
+      <span class="before"></span>
+      <span class="after"></span>
+    </div>
   </section>
   <section
     class="h-100 col-xxl-4 col-lg-4 col-md-6 col-sm-8 card p-0 m-0 text-center"

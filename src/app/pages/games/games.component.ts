@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-games',
@@ -8,13 +6,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./games.component.scss'],
 })
 export class GamesComponent implements OnInit {
-  constructor(
-    private readonly userService: UserService,
-    private readonly router: Router
-  ) {}
+  protected loading: boolean = true;
+
   ngOnInit(): void {
-    if (!this.userService.userLogged) {
-      this.router.navigateByUrl('user/login');
-    }
+    setTimeout(() => {
+      this.loading = false;
+    }, 2300);
   }
 }

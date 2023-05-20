@@ -53,7 +53,6 @@ export class UserLoginComponent implements OnInit {
     const icon = user ? 'success' : 'error';
     this.alertService.showAlert({ icon, message: message });
     this.router.navigateByUrl('games');
-    sessionStorage.setItem('access_token', await user.getIdToken());
   }
 
   private cleanFields(): void {

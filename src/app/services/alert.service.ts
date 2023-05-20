@@ -17,7 +17,7 @@ export class AlertService {
       icon: icon,
       title: message,
       showConfirmButton: false,
-      timer: 3000,
+      timer: 1500,
     });
   }
 }

@@ -6,13 +6,20 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  NextOrObserver,
+  CompleteFn,
+  ErrorFn,
+  User as UserFire,
+  browserSessionPersistence,
 } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseAuthProvider {
-  constructor(private readonly fireAuth: Auth) {}
+  constructor(private readonly fireAuth: Auth) {
+    this.fireAuth.setPersistence(browserSessionPersistence);
+  }
 
   public loginWithEmailAndPassword(user: User) {
     return signInWithEmailAndPassword(
@@ -30,11 +37,23 @@ export class FirebaseAuthProvider {
     );
   }
 
+  public get ApiKey() {
+    return this.fireAuth.config.apiKey;
+  }
+
   public loginWithGoogleAuthProvider() {
     return signInWithPopup(this.fireAuth, new GoogleAuthProvider());
   }
 
   public signOut() {
-    this.fireAuth.signOut();
+    return this.fireAuth.signOut();
+  }
+
+  public authState(
+    nextOrObserver: NextOrObserver<UserFire | null>,
+    error?: ErrorFn | undefined,
+    completed?: CompleteFn | undefined
+  ) {
+    return this.fireAuth.onAuthStateChanged(nextOrObserver);
   }
 }
