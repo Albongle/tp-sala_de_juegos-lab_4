@@ -15,6 +15,6 @@ export class ChatService {
     return this.firestoreProvider.saveDoc('mensajes', message);
   }
   public setMessageWithId(message: any, id: any) {
-    return this.firestoreProvider.setDocWithId('mensajes', id, message);
+    return this.firestoreProvider.saveDoc('mensajes', { id, message });
   }
 }

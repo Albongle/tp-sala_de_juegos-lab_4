@@ -47,7 +47,7 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.userService.userLogged) {
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('games');
     }
   }
 
@@ -58,8 +58,6 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
       const register = await this.userService.registerWithFirebase(user);
       const userSave = this.userService.saveUserInStore(user);
 
-      console.log(register);
-      console.log(userSave);
       this.alertService.showAlert({
         icon: 'success',
         message: 'Se registro usuario de forma exitosa',
@@ -79,9 +77,6 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
 
   private validateForm() {
     if (this.formNewUser.invalid) {
-      for (const key in this.formNewUser.controls) {
-        this.formNewUser.controls[key].markAsTouched();
-      }
       throw new Error('Debe completar los datos para el registro');
     }
   }

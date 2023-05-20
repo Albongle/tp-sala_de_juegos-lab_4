@@ -1,3 +1,100 @@
+<section class="loading" [hidden]="!loading">
+  <div class="row justify-content-center align-items-center" role="status">
+    <img
+      id="spinner"
+      class="col-xxl-5 col-lg-6 col-md-7 col-sm-8"
+      [hidden]="!loading"
+      src="../../assets/images/loading.gif"
+      alt="loading"
+    />
+  </div>
+</section>
 <section class="games">
-  <p>games works!</p>
+  <div
+    class="row w-100 m-0 p-2 justify-content-lg-evenly justify-content-center"
+    [hidden]="loading"
+  >
+    <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-8 card m-1">
+      <div class="card-header">
+        <img
+          [ngStyle]="{ width: '100%', height: '100%' }"
+          src="../../../../assets/images/ahorcado.png"
+          class="card-img-top img-fluid"
+          alt="ahorcado"
+        />
+      </div>
+      <div class="card-body">
+        <h5 class="card-title text-center">Ahorcado</h5>
+        <p class="card-text">
+          ¡Bienvenido al juego del Ahorcado! Prepárate para desafiar tu ingenio
+          y habilidades lingüísticas. Tendrás que adivinar la palabra oculta
+          letra por letra antes de que se complete el dibujo del ahorcado. Cada
+          intento cuenta, así que elige sabiamente tus letras. ¿Estás listo para
+          el desafío mental y la emoción de descubrir la palabra antes de que
+          sea demasiado tarde? ¡Demuestra tu destreza y adivina correctamente
+          para salvar al ahorcado!
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-body-secondary">
+          <a routerLink="/juegos/ahorcado" class="btn btn-outline-warning"
+            >Comenzar</a
+          ></small
+        >
+      </div>
+    </div>
+    <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-8 card m-1">
+      <div class="card-header">
+        <img
+          [ngStyle]="{ width: '100%', height: '100%' }"
+          src="./../../../assets/images/mayoromenor.png"
+          class="card-img-top img-fluid"
+          alt="Mayor o menor"
+        />
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Mayor o menor</h5>
+        <p class="card-text">
+          ¡Demuestra tu habilidad en el juego de "Mayor o Menor"! Debes predecir
+          correctamente si la próxima carta será mayor o menor. ¡No puedes
+          permitirte ningún error! ¿Estás preparado para el desafío?
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-body-secondary">
+          <a routerLink="/juegos/mayormenor" class="btn btn-outline-warning"
+            >Comenzar</a
+          ></small
+        >
+      </div>
+    </div>
+    <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-8 card m-1">
+      <div class="card-header">
+        <img
+          [ngStyle]="{ width: '100%', height: '100%' }"
+          src="../../../../assets/images/preguntados.png"
+          class="card-img-top img-fluid"
+          alt="preguntados"
+        />
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Preguntados</h5>
+        <p class="card-text">
+          ¡Bienvenido a Preguntados! Pon a prueba tus conocimientos en este
+          desafiante juego de preguntas y respuestas. Demuestra cuánto sabes en
+          diversas categorías y compite contra jugadores de todo el mundo.
+          ¿Estás listo para responder preguntas intrigantes, desbloquear logros
+          y convertirte en el campeón de Preguntados? ¡Adelante, demuestra tu
+          inteligencia y diviértete al máximo!
+        </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-body-secondary">
+          <a routerLink="/juegos/preguntados" class="btn btn-outline-warning"
+            >Comenzar</a
+          ></small
+        >
+      </div>
+    </div>
+  </div>
 </section>

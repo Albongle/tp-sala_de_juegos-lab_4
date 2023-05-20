@@ -53,12 +53,22 @@ export class UserLoginComponent implements OnInit {
     const icon = user ? 'success' : 'error';
     this.alertService.showAlert({ icon, message: message });
     this.router.navigateByUrl('games');
-    sessionStorage.setItem('access_token', await user.getIdToken());
   }
 
   private cleanFields(): void {
     for (const key in this.formLogin.controls) {
       this.formLogin.controls[key].setValue(undefined);
     }
+  }
+
+  public setUserTest() {
+    this.setUser('email@mail.com', '1234567');
+  }
+
+  public setUserAdmin() {
+    this.setUser('admin@mail.com', '1234567');
+  }
+  private setUser(email: string, password: string) {
+    this.formLogin.setValue({ email, password });
   }
 }
