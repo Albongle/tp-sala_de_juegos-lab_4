@@ -7,5 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [ChatComponent],
   imports: [CommonModule, ChatRoutingModule, ReactiveFormsModule],
+  exports: [ChatComponent],
 })
 export class ChatModule {}

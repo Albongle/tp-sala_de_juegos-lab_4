@@ -4,6 +4,7 @@ import { FirebaseAuthProvider } from '../providers/firebase_auth.provider';
 import { FirebaseStoreProvider } from '../providers/firebase_store.provider';
 import { User as UserFire } from 'firebase/auth';
 import { SessionStorageProvider } from '../providers/session_storage.provider';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class UserService {
   constructor(
     private readonly firebaseAuthProvider: FirebaseAuthProvider,
     private readonly firebaseStoreProvider: FirebaseStoreProvider,
-    private readonly sessionStorageProvider: SessionStorageProvider
+    private readonly sessionStorageProvider: SessionStorageProvider,
+    private readonly router: Router
   ) {}
 
   public async loginWithGoogle() {
@@ -52,6 +54,7 @@ export class UserService {
   public logout() {
     this.firebaseAuthProvider.signOut().then(() => {
       this._userLogged = null;
+      this.router.navigateByUrl('');
     });
   }
 }
