@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthorizationGuard implements CanActivate {
+export class UserLoggedGuard implements CanActivate {
   constructor(
     private readonly userService: UserService,
     private readonly router: Router
@@ -27,9 +27,9 @@ export class AuthorizationGuard implements CanActivate {
     | UrlTree {
     this.userService.setUserLogger();
     if (this.userService.userLogged) {
-      return true;
+      this.router.navigateByUrl('games');
+      return false;
     }
-    this.router.navigateByUrl('');
-    return false;
+    return true;
   }
 }

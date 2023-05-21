@@ -3,6 +3,7 @@ import { User } from '../models/user.model';
 import { FirebaseAuthProvider } from '../providers/firebase_auth.provider';
 import { FirebaseStoreProvider } from '../providers/firebase_store.provider';
 import { User as UserFire } from 'firebase/auth';
+import { SessionStorageProvider } from '../providers/session_storage.provider';
 
 @Injectable({
   providedIn: 'root',
@@ -11,13 +12,15 @@ export class UserService {
   private _userLogged: UserFire | null;
   constructor(
     private readonly firebaseAuthProvider: FirebaseAuthProvider,
-    private readonly firebaseStoreProvider: FirebaseStoreProvider
+    private readonly firebaseStoreProvider: FirebaseStoreProvider,
+    private readonly sessionStorageProvider: SessionStorageProvider
   ) {}
 
   public async loginWithGoogle() {
     const result =
       await this.firebaseAuthProvider.loginWithGoogleAuthProvider();
     this._userLogged = result.user;
+
     return this._userLogged;
   }
   public async loginWithEmailAndPassword(user: User) {
@@ -25,6 +28,7 @@ export class UserService {
       user
     );
     this._userLogged = result.user;
+
     return this._userLogged;
   }
 
@@ -32,10 +36,8 @@ export class UserService {
     return this._userLogged;
   }
 
-  public async setUserLogger() {
-    this.firebaseAuthProvider.authState((user) => {
-      this._userLogged = user;
-    });
+  public setUserLogger() {
+    this._userLogged = this.sessionStorageProvider.getCurrentUser();
   }
 
   public registerWithFirebase(user: User) {

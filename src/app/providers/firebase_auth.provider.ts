@@ -6,10 +6,6 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  NextOrObserver,
-  CompleteFn,
-  ErrorFn,
-  User as UserFire,
   browserSessionPersistence,
 } from '@angular/fire/auth';
 
@@ -47,13 +43,5 @@ export class FirebaseAuthProvider {
 
   public signOut() {
     return this.fireAuth.signOut();
-  }
-
-  public authState(
-    nextOrObserver: NextOrObserver<UserFire | null>,
-    error?: ErrorFn | undefined,
-    completed?: CompleteFn | undefined
-  ) {
-    return this.fireAuth.onAuthStateChanged(nextOrObserver);
   }
 }
