@@ -23,6 +23,6 @@ export class FirebaseStoreProvider {
   }
 
   public setDocWithId(col: string, id: any, data: any) {
-    return setDoc(doc(this.firestore, 'mensajes', id), data);
+    return setDoc(doc(this.firestore, col, id), data);
   }
 }

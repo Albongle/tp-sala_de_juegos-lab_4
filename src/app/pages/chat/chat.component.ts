@@ -39,22 +39,18 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit(): void {
-    if (!this.userService.userLogged) {
-      this.router.navigateByUrl('');
-    } else {
-      this.subscribeChat = this.chatService
-        .getAllMessages()
-        .pipe(
-          map((message) => {
-            const mapeo = message.reduce((prev: any, curr: any) => {
-              prev.push(...curr.messages);
-              return prev;
-            }, []);
-            return mapeo;
-          })
-        )
-        .subscribe((messages) => (this.listOfMessages = [...messages]));
-    }
+    this.subscribeChat = this.chatService
+      .getAllMessages()
+      .pipe(
+        map((message) => {
+          const mapeo = message.reduce((prev: any, curr: any) => {
+            prev.push(...curr.messages);
+            return prev;
+          }, []);
+          return mapeo;
+        })
+      )
+      .subscribe((messages) => (this.listOfMessages = [...messages]));
   }
 
   private getNewMessage() {
@@ -94,6 +90,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
   protected activatedChat() {
     this.activated = !this.activated;
-    this.scrollLastElement();
+    if (this.activated) {
+      this.scrollLastElement();
+    }
   }
 }
