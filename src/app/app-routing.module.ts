@@ -40,6 +40,11 @@ const routes: Routes = [
     canActivate: [AuthorizationGuard],
   },
   {
+    path: 'surveys',
+    loadChildren: () =>
+      import('./pages/surveys/surveys.module').then((m) => m.SurveysModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./pages/error/error.module').then((m) => m.ErrorModule),

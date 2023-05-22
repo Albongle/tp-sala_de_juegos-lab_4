@@ -7,7 +7,7 @@ import { Country } from '../models/contry.model';
   providedIn: 'root',
 })
 export class CountryService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) {}
 
   public getCountries(): Observable<Country[]> {
     return this.httpClient

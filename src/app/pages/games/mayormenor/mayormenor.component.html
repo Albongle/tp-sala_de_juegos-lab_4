@@ -1,1 +1,76 @@
-<p>mayormenor works!</p>
+<section class="loading m-0 p-3 w-100" [hidden]="!loading">
+  <div class="row justify-content-center align-items-center">
+    <div class="d-flex justify-content-center">
+      <img
+        id="spinner"
+        class="m-0"
+        [hidden]="!loading"
+        src="../../../assets/images/games/loading_game_mario.gif"
+        alt="loading"
+      />
+    </div>
+    <div class="d-flex justify-content-center">
+      <img
+        id="spinner"
+        [ngStyle]="{ width: '128px' }"
+        class="col-xxl-5 col-lg-6 col-md-7 col-sm-8"
+        [hidden]="!loading"
+        src="../../../assets/images/games/loading_game_bar.gif"
+        alt="loading"
+      />
+    </div>
+  </div>
+</section>
+<section class="mayormenor m-0 p-3 h-100 w-100" [hidden]="loading">
+  <div class="text-center">
+    <h3>
+      Puntaje <span> {{ score }} </span>
+    </h3>
+    <div
+      class="row m-5 justify-content-center align-items-center bg-success border border-5 rounded-1 border-dark-subtle p-5"
+    >
+      <div
+        class="col-xxl-4 col-lg-3 col-md-5 col-sm-7 d-flex justify-content-center"
+      >
+        <img
+          class="img-fluid col-6"
+          [src]="playerImage"
+          alt="naipe_a_evaluar"
+        />
+      </div>
+      <div
+        class="m-1 col-xxl-2 col-lg-3 col-md-7 col-sm-7 d-flex justify-content-center"
+      >
+        <img
+          [hidden]="!showResult"
+          class="img-fluid col-4"
+          [src]="actionResultImage"
+          alt="naipe_a_descubir"
+        />
+      </div>
+      <div
+        class="col-xxl-4 col-lg-3 col-md-5 col-sm-7 d-flex justify-content-center"
+      >
+        <img
+          class="img-fluid col-6"
+          [src]="secretImage"
+          alt="naipe_a_descubir"
+        />
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <button
+        class="m-1 col-xxl-2 col-lg-3 col-md-4 col-sm-5 btn btn-info"
+        (click)="isSmaller()"
+      >
+        Menor
+      </button>
+      <button
+        class="m-1 col-xxl-2 col-lg-3 col-md-4 col-sm-5 btn btn-warning"
+        (click)="isBigger()"
+      >
+        Mayor
+      </button>
+    </div>
+  </div>
+</section>

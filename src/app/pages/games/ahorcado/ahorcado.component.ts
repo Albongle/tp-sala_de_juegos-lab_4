@@ -8,6 +8,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./ahorcado.component.scss'],
 })
 export class AhorcadoComponent implements OnInit {
+  private static scoreIncrement = 15;
+  private static scoreDecrement = 5;
+  private static scoreInitial = 0;
+  private static attempsInitial = 0;
+  private static maxAttempsInitial = 5;
   protected loading: boolean;
   protected keyBoard: string[];
   protected attemps: number;
@@ -15,7 +20,7 @@ export class AhorcadoComponent implements OnInit {
   protected score: number;
   protected secretWord: string[];
   protected playerWord: string[];
-  private words: string[] = [
+  private static words: string[] = [
     'MANZANA',
     'PERRO',
     'GATO',
@@ -44,9 +49,9 @@ export class AhorcadoComponent implements OnInit {
   ) {
     this.loading = true;
     this.keyBoard = [];
-    this.attemps = 0;
-    this.maxAttemps = 6;
-    this.score = 0;
+    this.attemps = AhorcadoComponent.attempsInitial;
+    this.maxAttemps = AhorcadoComponent.maxAttempsInitial;
+    this.score = AhorcadoComponent.scoreInitial;
     this.createKeyboard();
     this.assignSecretWord();
   }
@@ -63,9 +68,9 @@ export class AhorcadoComponent implements OnInit {
     }
   }
   private assignSecretWord() {
-    const random = Math.floor(Math.random() * this.words.length);
-    this.secretWord = this.words[random].split('');
-    this.playerWord = this.words[random].split('');
+    const random = Math.floor(Math.random() * AhorcadoComponent.words.length);
+    this.secretWord = AhorcadoComponent.words[random].split('');
+    this.playerWord = AhorcadoComponent.words[random].split('');
     this.mapPlayerWord('_');
     this.setImage();
   }
@@ -115,18 +120,18 @@ export class AhorcadoComponent implements OnInit {
         message: `Se asigno una nueva palabra`,
         timer: 2000,
       });
-      this.attemps = 0;
+      this.attemps = AhorcadoComponent.attempsInitial;
       this.assignSecretWord();
     }, 4000);
   }
   private setScore(result: boolean) {
     if (result) {
-      this.score += 15;
+      this.score += AhorcadoComponent.scoreIncrement;
     } else {
-      if (this.score - 5 < 0) {
-        this.score = 0;
+      if (this.score - AhorcadoComponent.scoreDecrement < 0) {
+        this.score = AhorcadoComponent.scoreInitial;
       } else {
-        this.score -= 5;
+        this.score -= AhorcadoComponent.scoreDecrement;
       }
     }
   }
