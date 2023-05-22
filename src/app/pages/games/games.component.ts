@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./games.component.scss'],
 })
 export class GamesComponent implements OnInit {
-  protected loading: boolean = true;
+  protected loading: boolean;
+
+  constructor() {
+    this.loading = true;
+  }
 
   ngOnInit(): void {
     setTimeout(() => {

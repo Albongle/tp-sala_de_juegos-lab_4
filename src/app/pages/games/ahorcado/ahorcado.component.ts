@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -7,7 +7,8 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './ahorcado.component.html',
   styleUrls: ['./ahorcado.component.scss'],
 })
-export class AhorcadoComponent {
+export class AhorcadoComponent implements OnInit {
+  protected loading: boolean;
   protected keyBoard: string[];
   protected attemps: number;
   protected maxAttemps: number;
@@ -41,12 +42,19 @@ export class AhorcadoComponent {
     private readonly userService: UserService,
     private readonly alertService: AlertService
   ) {
+    this.loading = true;
     this.keyBoard = [];
     this.attemps = 0;
     this.maxAttemps = 6;
     this.score = 0;
     this.createKeyboard();
     this.assignSecretWord();
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.loading = false;
+    }, 2300);
   }
 
   private createKeyboard() {
