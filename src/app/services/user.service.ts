@@ -22,7 +22,12 @@ export class UserService {
     const result =
       await this.firebaseAuthProvider.loginWithGoogleAuthProvider();
     this._userLogged = result.user;
-
+    const user = new User({
+      userId: result.user.uid,
+      name: result.user.displayName!,
+      email: result.user.email!,
+    });
+    await this.saveUserWithIdInStore(user.userId!, user);
     return this._userLogged;
   }
   public async loginWithEmailAndPassword(user: User) {
@@ -42,14 +47,23 @@ export class UserService {
     this._userLogged = this.sessionStorageProvider.getCurrentUser();
   }
 
-  public registerWithFirebase(user: User) {
-    return this.firebaseAuthProvider.registerUserWithEmailAndPassword(user);
+  public async registerWithFirebase(user: User) {
+    const result =
+      await this.firebaseAuthProvider.registerUserWithEmailAndPassword(user);
+    user.userId = result.user.uid;
+    await this.saveUserWithIdInStore(user.userId, user);
+    return user;
   }
   public getUsersFromStore() {
     return this.firebaseStoreProvider.getCollection('usuarios');
   }
-  public saveUserInStore(user: User) {
-    return this.firebaseStoreProvider.saveDoc('usuarios', { ...user });
+
+  public saveUserWithIdInStore(id: string, user: User) {
+    return this.firebaseStoreProvider.setDocWithId(
+      'usuarios',
+      id,
+      JSON.parse(JSON.stringify(user))
+    );
   }
   public logout() {
     this.firebaseAuthProvider.signOut().then(() => {

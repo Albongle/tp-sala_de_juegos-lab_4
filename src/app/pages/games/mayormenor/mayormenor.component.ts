@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Score } from 'src/app/models/score.model';
+import { ScoreService } from 'src/app/services/score.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-mayormenor',
   templateUrl: './mayormenor.component.html',
   styleUrls: ['./mayormenor.component.scss'],
 })
-export class MayormenorComponent implements OnInit {
+export class MayormenorComponent implements OnInit, OnDestroy {
   private static scoreIncrement = 15;
   private static scoreDecrement = 5;
   private static scoreInitial = 0;
@@ -18,7 +21,10 @@ export class MayormenorComponent implements OnInit {
   protected actionResult: boolean;
   protected showResult: boolean;
   protected score: number;
-  constructor() {
+  constructor(
+    private readonly scoreService: ScoreService,
+    private readonly userService: UserService
+  ) {
     this.loading = true;
     this.score = MayormenorComponent.scoreInitial;
     this.actionResult = true;
@@ -27,6 +33,9 @@ export class MayormenorComponent implements OnInit {
       '../../../../assets/images/games/mayormenor/true.png';
     this.assingPlayerImage();
     this.assingSecretImage();
+  }
+  ngOnDestroy(): void {
+    this.endGame();
   }
 
   ngOnInit(): void {
@@ -82,6 +91,19 @@ export class MayormenorComponent implements OnInit {
       } else {
         this.score -= MayormenorComponent.scoreDecrement;
       }
+    }
+  }
+  protected endGame() {
+    if (this.score > 0) {
+      const userId = this.userService.userLogged?.uid;
+      const score = new Score({
+        userId: userId as string,
+        game: 'Mayor o Menor',
+        date: new Date(),
+        value: this.score,
+      });
+
+      this.scoreService.saveScoreWithIdInStore(score);
     }
   }
 }

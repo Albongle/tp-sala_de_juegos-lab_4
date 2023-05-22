@@ -55,8 +55,7 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
     try {
       this.validateForm();
       const user = new User(this.formNewUser.value);
-      const register = await this.userService.registerWithFirebase(user);
-      const userSave = this.userService.saveUserInStore(user);
+      await this.userService.registerWithFirebase(user);
 
       this.alertService.showAlert({
         icon: 'success',

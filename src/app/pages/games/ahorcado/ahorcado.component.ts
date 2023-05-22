@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Score } from 'src/app/models/score.model';
 import { AlertService } from 'src/app/services/alert.service';
+import { ScoreService } from 'src/app/services/score.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -7,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './ahorcado.component.html',
   styleUrls: ['./ahorcado.component.scss'],
 })
-export class AhorcadoComponent implements OnInit {
+export class AhorcadoComponent implements OnInit, OnDestroy {
   private static scoreIncrement = 15;
   private static scoreDecrement = 5;
   private static scoreInitial = 0;
@@ -45,7 +47,8 @@ export class AhorcadoComponent implements OnInit {
   protected image: string;
   constructor(
     private readonly userService: UserService,
-    private readonly alertService: AlertService
+    private readonly alertService: AlertService,
+    private readonly scoreService: ScoreService
   ) {
     this.loading = true;
     this.keyBoard = [];
@@ -54,6 +57,9 @@ export class AhorcadoComponent implements OnInit {
     this.score = AhorcadoComponent.scoreInitial;
     this.createKeyboard();
     this.assignSecretWord();
+  }
+  ngOnDestroy(): void {
+    this.endGame();
   }
 
   ngOnInit(): void {
@@ -149,6 +155,20 @@ export class AhorcadoComponent implements OnInit {
         message: `Se agotaron los intentos, la palabra secreta era ${secretWord}`,
         timer: 3000,
       });
+    }
+  }
+
+  protected endGame() {
+    if (this.score > 0) {
+      const userId = this.userService.userLogged?.uid;
+      const score = new Score({
+        userId: userId as string,
+        game: 'Ahorcado',
+        date: new Date(),
+        value: this.score,
+      });
+
+      this.scoreService.saveScoreWithIdInStore(score);
     }
   }
 }

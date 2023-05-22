@@ -81,11 +81,13 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   private scrollLastElement(): void {
     const listMessages: any = document.querySelectorAll('.mensaje');
-    let position = listMessages[listMessages.length - 1].offsetTop;
+    if (listMessages.length > 0) {
+      let position = listMessages[listMessages.length - 1].offsetTop;
 
-    const containerMsj = document.querySelector('#contendor-msjs');
-    if (containerMsj !== null) {
-      containerMsj.scrollTop = position;
+      const containerMsj = document.querySelector('#contendor-msjs');
+      if (containerMsj !== null) {
+        containerMsj.scrollTop = position;
+      }
     }
   }
   protected activatedChat() {
