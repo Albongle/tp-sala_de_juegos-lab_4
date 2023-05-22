@@ -14,7 +14,7 @@ export class AhorcadoComponent implements OnInit, OnDestroy {
   private static scoreDecrement = 5;
   private static scoreInitial = 0;
   private static attempsInitial = 0;
-  private static maxAttempsInitial = 5;
+  private static maxAttempsInitial = 6;
   protected loading: boolean;
   protected keyBoard: string[];
   protected attemps: number;
