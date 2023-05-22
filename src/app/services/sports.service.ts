@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environments';
 @Injectable({
   providedIn: 'root',
 })
 export class SportsService {
-  private apiKey: string;
   private url: string;
   constructor(private readonly httpClient: HttpClient) {
     this.url = 'https://apiv2.allsportsapi.com/football/?&met=';
-    this.apiKey =
-      'f7c234341b025d433181162b7d5f7af06b727b34093e393ee8c36bfbf8b6c965';
   }
 
   public getTeamByName(name: string) {
-    const host = `${this.url}Teams&teamName=${name}&APIkey=${this.apiKey}`;
+    const host = `${this.url}Teams&teamName=${name}&APIkey=${environment.soportsApi.apiKey}`;
     return this.httpClient.get(host);
   }
 }
