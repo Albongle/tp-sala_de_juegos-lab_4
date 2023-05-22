@@ -1,1 +1,51 @@
-<p>preguntados works!</p>
+<section class="loading m-0 p-3 w-100" [hidden]="!loading">
+  <div class="row justify-content-center align-items-center">
+    <div class="d-flex justify-content-center">
+      <img
+        id="spinner"
+        class="m-0"
+        [hidden]="!loading"
+        src="../../../assets/images/games/loading_game_mario.gif"
+        alt="loading"
+      />
+    </div>
+    <div class="d-flex justify-content-center">
+      <img
+        id="spinner"
+        [ngStyle]="{ width: '128px' }"
+        class="col-xxl-5 col-lg-6 col-md-7 col-sm-8"
+        [hidden]="!loading"
+        src="../../../assets/images/games/loading_game_bar.gif"
+        alt="loading"
+      />
+    </div>
+  </div>
+</section>
+<section class="preguntados w-100 m-0 p-5">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-8">
+      <h2 class="text-center">
+        Puntaje <span> {{ score }} </span>
+      </h2>
+      <h3 class="text-center">Seleccione el nombre del equipo descrubir</h3>
+      <div
+        class="col-lg-5 col-sm-6 text-center border border-secondary-subtle rounded-2 w-100 p-5 border-4"
+      >
+        <img
+          class="img-fluid col-xxl-2 col-lg-3 col-md-4 col-sm-5 text-center"
+          [src]="secretImage"
+          alt="equipo"
+        />
+        <div class="row justify-content-evenly">
+          <button
+            class="col-xxls-1 col-lg-2 col-md-3 col-sm-6 m-1 btn btn-outline-warning"
+            *ngFor="let team of availableResponses"
+            (click)="assertTeam(team)"
+          >
+            {{ team }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

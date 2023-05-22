@@ -12,12 +12,8 @@ export class SportsService {
       'f7c234341b025d433181162b7d5f7af06b727b34093e393ee8c36bfbf8b6c965';
   }
 
-  public getTeamById(id: string) {
-    const host = `${this.url}Teams&teamId=${id}APIkey=${this.apiKey}`;
-    return this.httpClient.get(host);
-  }
-  public getLeagueByCountryId(countryId: string) {
-    const host = `${this.url}Leagues&APIkey=${this.apiKey}&countryId=${countryId}`;
+  public getTeamByName(name: string) {
+    const host = `${this.url}Teams&teamName=${name}&APIkey=${this.apiKey}`;
     return this.httpClient.get(host);
   }
 }
