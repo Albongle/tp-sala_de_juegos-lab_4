@@ -1,0 +1,33 @@
+<section class="ahorcado m-0 p-3 w-100">
+  <div class="row h-100 w-100 align-items-center">
+    <div class="col text-center">
+      <h3>
+        Puntaje <span> {{ score }} </span>
+      </h3>
+      <img src="{{ image }}" alt="ahorcado" />
+      <div>
+        <h3>
+          Intentos <small> {{ attemps }}/{{ maxAttemps }}</small>
+        </h3>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <div *ngFor="let key of playerWord" class="d-inline-block p-1 m-1">
+            {{ key }}
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-around">
+        <div class="col-xxl-6 col-lg-7 col-md-8 col-sm-10">
+          <button
+            *ngFor="let key of keyBoard"
+            class="col-1 btn btn-outline-secondary m-1"
+            (click)="assertLetter(key)"
+          >
+            {{ key }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -35,12 +35,37 @@
         routerLink="user/register"
         >Registrate</a
       >
-      <a
+      <ul
         *ngIf="userService.userLogged"
-        class="nav-link text-light"
-        routerLink="games"
-        >Juegos</a
+        class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+        style="--bs-scroll-height: 100px"
       >
+        <li class="nav-item dropdown">
+          <a
+            class="text-light nav-link dropdown-toggle"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span routerLink="games">Juegos</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" routerLink="games/ahorcado">Ahorcado</a>
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="games/mayormenor"
+                >Mayor o Menor</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="games/preguntados"
+                >Preguntados</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
       <a
         *ngIf="userService.userLogged"
         class="nav-link text-light"

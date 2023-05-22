@@ -5,19 +5,17 @@ import Swal, { SweetAlertIcon } from 'sweetalert2';
   providedIn: 'root',
 })
 export class AlertService {
-  public showAlert({
-    icon,
-    message,
-  }: {
+  public showAlert(config: {
     icon: SweetAlertIcon;
     message: string;
+    timer?: number;
   }) {
     Swal.fire({
       position: 'center',
-      icon: icon,
-      title: message,
+      icon: config.icon,
+      title: config.message,
       showConfirmButton: false,
-      timer: 1500,
+      timer: config.timer ?? 1500,
     });
   }
 }
