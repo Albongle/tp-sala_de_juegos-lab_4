@@ -1,0 +1,18 @@
+<section class="h-100 p-4">
+  <table *ngIf="list" class="table">
+    <thead>
+      <tr>
+        <th class="text-center" *ngFor="let item of list[0] | keyvalue">
+          {{ item.key }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let element of list">
+        <td class="text-center" *ngFor="let item of element | keyvalue">
+          {{ item.value }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

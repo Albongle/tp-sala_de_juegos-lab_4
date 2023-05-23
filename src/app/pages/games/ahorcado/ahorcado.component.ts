@@ -160,15 +160,15 @@ export class AhorcadoComponent implements OnInit, OnDestroy {
 
   protected endGame() {
     if (this.score > 0) {
-      const userId = this.userService.userLogged?.uid;
+      const email = this.userService.userLogged?.email;
       const score = new Score({
-        userId: userId as string,
+        email: email as string,
         game: 'Ahorcado',
         date: new Date(),
         value: this.score,
       });
 
-      this.scoreService.saveScoreWithIdInStore(score);
+      this.scoreService.saveScoreInStore(score);
     }
   }
 }

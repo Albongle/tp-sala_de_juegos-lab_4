@@ -77,6 +77,27 @@
         routerLink="about"
         >Acerca De</a
       >
+      <a
+        *ngIf="userService.userLogged"
+        class="nav-link text-light"
+        routerLink="scores"
+        >Scores</a
+      >
+      <a
+        *ngIf="userService.userLogged"
+        class="nav-link text-light"
+        routerLink="surveys"
+        >Encuesta</a
+      >
+      <a
+        *ngIf="
+          userService.userLogged &&
+          userService.userLogged.email === 'admin@mail.com'
+        "
+        class="nav-link text-warning"
+        routerLink="surveylist"
+        >Listado de Encuestas</a
+      >
     </div>
   </div>
 

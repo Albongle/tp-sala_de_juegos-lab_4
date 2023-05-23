@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthorizationGuard } from './guards/authorization.guard';
 import { UserLoggedGuard } from './guards/user-logged.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -34,20 +35,24 @@ const routes: Routes = [
     canActivate: [AuthorizationGuard],
   },
   {
-    path: 'chat',
-    loadChildren: () =>
-      import('./components/chat/chat.module').then((m) => m.ChatModule),
-    canActivate: [AuthorizationGuard],
-  },
-  {
     path: 'surveys',
     loadChildren: () =>
       import('./pages/surveys/surveys.module').then((m) => m.SurveysModule),
+    canActivate: [AuthorizationGuard],
   },
   {
     path: 'scores',
     loadChildren: () =>
       import('./pages/scores/scores.module').then((m) => m.ScoresModule),
+    canActivate: [AuthorizationGuard],
+  },
+  {
+    path: 'surveylist',
+    loadChildren: () =>
+      import('./pages/survey-list/survey-list.module').then(
+        (m) => m.SurveyListModule
+      ),
+    canActivate: [AuthorizationGuard, AdminGuard],
   },
 
   {

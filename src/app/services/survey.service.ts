@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { FirebaseStoreProvider } from '../providers/firebase_store.provider';
-import { Score } from '../models/score.model';
+import { Survey } from '../models/survey.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ScoreService {
+export class SurveyService {
   constructor(private readonly firebaseStoreProvider: FirebaseStoreProvider) {}
 
-  public saveScoreInStore(score: Score) {
+  public saveSurveyInStore(survey: Survey) {
     return this.firebaseStoreProvider.saveDoc(
-      'scores',
-      JSON.parse(JSON.stringify(score))
+      'encuestas',
+      JSON.parse(JSON.stringify(survey))
     );
   }
 
-  public getAllScores() {
-    return this.firebaseStoreProvider.getCollection('scores');
+  public getAllSurveys() {
+    return this.firebaseStoreProvider.getCollection('encuestas');
   }
 }

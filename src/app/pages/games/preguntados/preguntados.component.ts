@@ -141,15 +141,15 @@ export class PreguntadosComponent implements OnInit, OnDestroy {
 
   protected endGame() {
     if (this.score > 0) {
-      const userId = this.userService.userLogged?.uid;
+      const email = this.userService.userLogged?.email;
       const score = new Score({
-        userId: userId as string,
-        game: 'preguntados',
+        email: email as string,
+        game: 'Preguntados',
         date: new Date(),
         value: this.score,
       });
 
-      this.scoreService.saveScoreWithIdInStore(score);
+      this.scoreService.saveScoreInStore(score);
     }
   }
 }

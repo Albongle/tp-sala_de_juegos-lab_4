@@ -1,16 +1,16 @@
 export class Score {
-  userId: string;
+  email: string;
   game: string;
   date: Date;
   value: number;
 
   constructor(score: {
-    userId: string;
+    email: string;
     game: string;
     date: Date;
     value: number;
   }) {
-    this.userId = score.userId;
+    this.email = score.email;
     this.date = score.date;
     this.game = score.game;
     this.value = score.value;

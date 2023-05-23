@@ -15,7 +15,7 @@ export class AdivinaElNumeroComponent implements OnInit, OnDestroy {
   private static scoreDecrement = 5;
   private static scoreInitial = 0;
   private static attempsInitial = 0;
-  private static maxAttempsInitial = 15;
+  private static maxAttempsInitial = 10;
   private secretNumber: number;
   protected loading: boolean;
   protected score: number;
@@ -111,48 +111,34 @@ export class AdivinaElNumeroComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   protected endGame() {
     if (this.score > 0) {
-      const userId = this.userService.userLogged?.uid;
+      const email = this.userService.userLogged?.email;
       const score = new Score({
-        userId: userId as string,
+        email: email as string,
         game: 'Adivina el numero',
         date: new Date(),
         value: this.score,
       });
 
-      this.scoreService.saveScoreWithIdInStore(score);
+      this.scoreService.saveScoreInStore(score);
     }
   }
 
   private showMessage(result: boolean) {
+    const messages: any = {
+      '1': 'Usted es un Psíquico',
+      '2': 'Excelente percepción',
+      '3': 'Esto es suerte',
+      '4': 'Excelente técnica',
+      '5': 'Usted está en la media',
+      '6': 'Falta técnica',
+      default: 'Afortunado en el amor!!',
+    };
     if (result) {
-      let message;
-      switch (this.attemps) {
-        case 1:
-          message = 'Usted es un Psíquico';
-          break;
-        case 2:
-          message = 'Excelente percepción';
-          break;
-        case 3:
-          message = 'Esto es suerte';
-          break;
-        case 4:
-          message = 'Excelente técnica';
-          break;
-        case 5:
-          message = 'Usted está en la media';
-          break;
+      const message = messages[this.attemps.toString()] ?? messages['default'];
 
-        default:
-          if (this.attemps < 10) {
-            message = 'Falta técnica';
-          } else {
-            message = 'Afortunado en el amor!!';
-          }
-          break;
-      }
       this.alertService.showAlert({
         icon: 'success',
         message: `${message}`,
