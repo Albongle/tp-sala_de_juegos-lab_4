@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Question, Survey } from 'src/app/models/survey.model';
 import { AlertService } from 'src/app/services/alert.service';
-import { UserService } from 'src/app/services/user.service';
+import { SurveyService } from 'src/app/services/survey.service';
 
 @Component({
   selector: 'app-surveys',
@@ -16,7 +17,7 @@ export class SurveysComponent {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly alertService: AlertService,
-    private readonly userService: UserService
+    private readonly surveyService: SurveyService
   ) {
     this.optionExperience = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     this.optionGame = [
@@ -50,17 +51,54 @@ export class SurveysComponent {
     });
   }
   public sendSurvey() {
-    console.log(this.formSurvey.controls['find'].value);
-    if (this.formSurvey.valid) {
+    try {
+      this.validateForm();
+      this.surveyService.saveSurveyInStore(this.getSurvey());
       this.alertService.showAlert({
         icon: 'success',
-        message: 'Todo Ok',
+        message: 'Registro completado con exito, gracias por participar',
       });
-    } else {
+    } catch (error: any) {
       this.alertService.showAlert({
         icon: 'error',
-        message: 'Debe completar el formulario',
+        message: error.message,
       });
+    }
+    this.formSurvey.reset();
+  }
+  private getSurvey() {
+    return new Survey({
+      date: new Date(),
+      email: this.formSurvey.controls['email'].value,
+      name: this.formSurvey.controls['name'].value,
+      lastName: this.formSurvey.controls['lastName'].value,
+      age: this.formSurvey.controls['age'].value,
+      questions: this.getQuestions(),
+    });
+  }
+
+  private getQuestions() {
+    const questions: Question[] = [
+      new Question({
+        question: 'Experiencia',
+        response: this.formSurvey.controls['experience'].value,
+      }),
+      new Question({
+        question: 'Juego Preferido',
+        response: this.formSurvey.controls['preference'].value,
+      }),
+      new Question({
+        question: 'Donde nos encontraste',
+        response: this.formSurvey.controls['find'].value,
+      }),
+    ];
+
+    return questions;
+  }
+
+  private validateForm() {
+    if (this.formSurvey.invalid) {
+      throw new Error('Debe completar los datos para el registro');
     }
   }
 }

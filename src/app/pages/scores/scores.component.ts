@@ -15,12 +15,12 @@ export class ScoresComponent {
       .getAllScores()
       .pipe(
         map((data: any) => {
-          return data.map((d: any) => {
+          return data.map((score: Score) => {
             return {
-              Fecha: new Date(d.date).toLocaleDateString(),
-              Juego: d.game,
-              Score: d.value,
-              Usuario: d.email,
+              Fecha: new Date(score.date).toLocaleDateString(),
+              Juego: score.game,
+              Score: score.value,
+              Usuario: score.email,
             };
           });
         })

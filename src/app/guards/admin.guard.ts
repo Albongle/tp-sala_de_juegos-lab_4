@@ -23,7 +23,7 @@ export class AdminGuard implements CanActivate {
     | boolean
     | UrlTree {
     this.userService.setUserLogger();
-    if (this.userService.userLogged?.email === 'admin') {
+    if (this.userService.userLogged?.email === 'admin@mail.com') {
       return true;
     }
     return false;

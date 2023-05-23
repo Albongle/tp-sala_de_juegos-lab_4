@@ -65,13 +65,7 @@ export class UserRegisterComponent implements OnInit, OnDestroy {
       this.alertService.showAlert({ icon: 'error', message: error.message });
     }
 
-    this.cleanFields();
-  }
-
-  private cleanFields(): void {
-    for (const key in this.formNewUser.controls) {
-      this.formNewUser.controls[key].setValue(undefined);
-    }
+    this.formNewUser.reset();
   }
 
   private validateForm() {

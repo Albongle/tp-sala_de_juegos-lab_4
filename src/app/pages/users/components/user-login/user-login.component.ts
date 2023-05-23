@@ -44,7 +44,7 @@ export class UserLoginComponent implements OnInit {
       this.alertService.showAlert({ icon: 'error', message: error.message });
     }
 
-    this.cleanFields();
+    this.formLogin.reset();
   }
 
   public async loginWithGoogle() {
@@ -53,12 +53,6 @@ export class UserLoginComponent implements OnInit {
     const icon = user ? 'success' : 'error';
     this.alertService.showAlert({ icon, message: message });
     this.router.navigateByUrl('games');
-  }
-
-  private cleanFields(): void {
-    for (const key in this.formLogin.controls) {
-      this.formLogin.controls[key].setValue(undefined);
-    }
   }
 
   public setUserTest() {
