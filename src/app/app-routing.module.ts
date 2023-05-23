@@ -44,6 +44,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/surveys/surveys.module').then((m) => m.SurveysModule),
   },
+  { path: 'scores', loadChildren: () => import('./pages/scores/scores.module').then(m => m.ScoresModule) },
   {
     path: '**',
     loadChildren: () =>
