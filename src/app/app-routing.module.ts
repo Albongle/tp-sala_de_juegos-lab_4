@@ -36,7 +36,7 @@ const routes: Routes = [
   {
     path: 'chat',
     loadChildren: () =>
-      import('./pages/chat/chat.module').then((m) => m.ChatModule),
+      import('./components/chat/chat.module').then((m) => m.ChatModule),
     canActivate: [AuthorizationGuard],
   },
   {
@@ -44,7 +44,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/surveys/surveys.module').then((m) => m.SurveysModule),
   },
-  { path: 'scores', loadChildren: () => import('./pages/scores/scores.module').then(m => m.ScoresModule) },
+  {
+    path: 'scores',
+    loadChildren: () =>
+      import('./pages/scores/scores.module').then((m) => m.ScoresModule),
+  },
+
   {
     path: '**',
     loadChildren: () =>

@@ -10,7 +10,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { WelcomeModule } from './pages/welcome/welcome.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ChatModule } from './pages/chat/chat.module';
+import { ChatModule } from './components/chat/chat.module';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, NavBarComponent],

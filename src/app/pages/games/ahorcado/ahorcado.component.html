@@ -1,26 +1,4 @@
-<section class="loading m-0 p-3 w-100" [hidden]="!loading">
-  <div class="row justify-content-center align-items-center">
-    <div class="d-flex justify-content-center">
-      <img
-        id="spinner"
-        class="m-0"
-        [hidden]="!loading"
-        src="../../../assets/images/games/loading_game_mario.gif"
-        alt="loading"
-      />
-    </div>
-    <div class="d-flex justify-content-center">
-      <img
-        id="spinner"
-        [ngStyle]="{ width: '128px' }"
-        class="col-xxl-5 col-lg-6 col-md-7 col-sm-8"
-        [hidden]="!loading"
-        src="../../../assets/images/games/loading_game_bar.gif"
-        alt="loading"
-      />
-    </div>
-  </div>
-</section>
+<app-loading [loading]="loading"></app-loading>
 <section class="ahorcado m-0 p-3 w-100" [hidden]="loading">
   <div class="row h-100 w-100 align-items-center">
     <div class="col text-center">

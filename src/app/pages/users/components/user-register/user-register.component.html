@@ -32,8 +32,8 @@
 
             <span
               [hidden]="
-                !formNewUser.controls['name'].pristine ||
-                formNewUser.controls['name'].errors
+                formNewUser.controls['name'].pristine ||
+                !formNewUser.controls['name'].errors
               "
               class="mt-2 p-0 shadow text-center form-control alert alert-danger"
               >Nombre es requerido</span
@@ -51,8 +51,8 @@
             />
             <span
               [hidden]="
-                !formNewUser.controls['lastName'].pristine ||
-                formNewUser.controls['lastName'].errors
+                formNewUser.controls['lastName'].pristine ||
+                !formNewUser.controls['lastName'].errors
               "
               class="mt-2 p-0 shadow text-center form-control alert alert-danger"
               >Apellido es requerido</span
@@ -73,8 +73,8 @@
             </div>
             <span
               [hidden]="
-                !formNewUser.controls['user'].pristine ||
-                formNewUser.controls['user'].errors
+                formNewUser.controls['user'].pristine ||
+                !formNewUser.controls['user'].errors
               "
               class="mt-2 p-0 shadow text-center form-control alert alert-danger"
               >Usuario es requerido</span
@@ -94,8 +94,8 @@
             </div>
             <span
               [hidden]="
-                !formNewUser.controls['password'].pristine ||
-                formNewUser.controls['password'].errors
+                formNewUser.controls['password'].pristine ||
+                !formNewUser.controls['password'].errors
               "
               class="mt-2 p-0 shadow text-center form-control alert alert-danger"
               >Password es requerido</span
@@ -113,8 +113,8 @@
             />
             <div
               [hidden]="
-                !formNewUser.controls['email'].pristine ||
-                formNewUser.controls['email'].invalid
+                formNewUser.controls['email'].pristine ||
+                !formNewUser.controls['email'].invalid
               "
             >
               <span
@@ -141,8 +141,8 @@
             />
             <span
               [hidden]="
-                !formNewUser.controls['address'].pristine ||
-                formNewUser.controls['address'].errors
+                formNewUser.controls['address'].pristine ||
+                !formNewUser.controls['address'].errors
               "
               class="mt-2 p-0 shadow text-center form-control alert alert-danger"
               >Direccion es requerido</span
@@ -174,8 +174,8 @@
             </div>
             <span
               [hidden]="
-                !formNewUser.controls['country'].pristine ||
-                formNewUser.controls['country'].errors
+                formNewUser.controls['country'].pristine ||
+                !formNewUser.controls['country'].errors
               "
               class="mt-2 p-0 shadow text-center form-control alert alert-danger"
               >Debe elegir un pais</span
