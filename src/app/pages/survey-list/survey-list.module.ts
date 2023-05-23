@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { SurveyListRoutingModule } from './survey-list-routing.module';
 import { SurveyListComponent } from './survey-list.component';
-import { ListModule } from 'src/app/components/list/list.module';
+import { TableModule } from 'src/app/components/table/table.module';
 
 @NgModule({
   declarations: [SurveyListComponent],
-  imports: [CommonModule, SurveyListRoutingModule, ListModule],
+  imports: [CommonModule, SurveyListRoutingModule, TableModule],
 })
 export class SurveyListModule {}

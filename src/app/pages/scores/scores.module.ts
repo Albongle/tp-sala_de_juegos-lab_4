@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { ScoresRoutingModule } from './scores-routing.module';
 import { ScoresComponent } from './scores.component';
-import { ListModule } from 'src/app/components/list/list.module';
+import { TableModule } from 'src/app/components/table/table.module';
 
 @NgModule({
   declarations: [ScoresComponent],
-  imports: [CommonModule, ScoresRoutingModule, ListModule],
+  imports: [CommonModule, ScoresRoutingModule, TableModule],
 })
 export class ScoresModule {}
