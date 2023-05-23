@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { ChatService } from '../../services/chat.service';
 import { Subscription, map } from 'rxjs';
+import { Message } from 'src/app/models/message.model';
 
 @Component({
   selector: 'app-chat',
@@ -17,17 +18,18 @@ export class ChatComponent implements OnInit, OnDestroy {
   protected formatMessageSent: string;
   protected activated: boolean;
   private subscribeChat: Subscription;
+  private userMessages: Array<any>;
 
   constructor(
     protected readonly userService: UserService,
     private readonly formBuilder: FormBuilder,
-    private readonly chatService: ChatService,
-    private readonly router: Router
+    private readonly chatService: ChatService
   ) {
     this.formChat = this.formBuilder.group({
       message: ['', Validators.required],
     });
     this.listOfMessages = [];
+    this.userMessages = [];
     this.formatMessageSent =
       'mensaje bg-success p-2 fs-5 rounded-pill fw-light enviado';
     this.formatMessageReceived =
@@ -41,37 +43,33 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscribeChat = this.chatService
       .getAllMessages()
-      .pipe(
-        map((message) => {
-          const mapeo = message.reduce((prev: any, curr: any) => {
-            prev.push(...curr.messages);
-            return prev;
-          }, []);
-          return mapeo;
-        })
-      )
-      .subscribe((messages) => (this.listOfMessages = [...messages]));
+      .subscribe((messages: any) => {
+        messages.sort(
+          (m1: Message, m2: Message) =>
+            new Date(m1.date).getTime() < new Date(m2.date).getTime()
+        );
+        this.listOfMessages = messages;
+      });
   }
 
   private getNewMessage() {
-    return {
-      email: this.userService.userLogged?.email,
+    const date = new Date();
+    return new Message({
+      date: date,
+      email: this.userService.userLogged?.email as string,
       user:
         this.userService.userLogged?.displayName ??
-        this.userService.userLogged?.email,
+        (this.userService.userLogged?.email as string),
       message: this.formChat.value.message as string,
-      time: new Date().toISOString(),
-    };
+      dateSent: `${date.toLocaleDateString()} - ${date.toLocaleTimeString()}`,
+    });
   }
   protected sendMessage() {
     if (this.formChat.valid) {
       const message = this.getNewMessage();
-      this.listOfMessages.push(message);
-      this.chatService.setMessageWithId(
-        { messages: [...this.listOfMessages] },
-        this.userService.userLogged?.uid
-      );
-      this.formChat.controls['message'].setValue(undefined);
+
+      this.chatService.saveMessage(message);
+      this.formChat.reset();
 
       setTimeout(() => {
         this.scrollLastElement();
