@@ -117,7 +117,7 @@ export class PreguntadosComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.alertService.showAlert({
         icon: 'info',
-        message: `Se asigno una nuevo equipo`,
+        message: `Se asigno un nuevo equipo`,
         timer: 2000,
       });
 
